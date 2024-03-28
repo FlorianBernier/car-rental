@@ -1,0 +1,19 @@
+
+<div class="container py-3">
+<%= link_to "Home", root_path, class: "btn btn-primary" %>
+
+  <%# CARD LISTE %>
+  <div class="row justify-content-md-center">
+
+    <% @cars.each do |car| %>
+      <div class="col-3 m-3 bg-white rounded p-3 shadow">
+        <%= link_to car_path(car), class:"text-decoration-none" do %>
+          <h2><%= car.brand %> <%= car.model %></h2>
+          <p><strong>Année de production:</strong> <%= car.year_of_production %></p>
+          <p><strong>Adresse:</strong> <%= car.address %></p>
+          <p><strong>Prix par jour:</strong> <%= car.price_per_day %>€</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
