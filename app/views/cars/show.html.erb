@@ -3,13 +3,53 @@
   <%= link_to "Retour à la liste des voitures", cars_path, class: "btn btn-primary" %>
 
 
-  <div class="row justify-content-md-center">
-    <div class="col-4 m-3 bg-white rounded p-3 shadow">
-      <h2><%= @car.brand %> <%= @car.model %></h2>
-      <p><strong>Année de production:</strong> <%= @car.year_of_production %></p>
-      <p><strong>Adresse:</strong> <%= @car.address %></p>
-      <p><strong>Prix par jour:</strong> <%= @car.price_per_day %>€</p>
+  <div class="row justify-content-center">
+    <div class="col m-3 bg-white rounded p-3 shadow">
+      <div style="display:flex; width:100%; place-content:center;">
+        <img src="https://i.pravatar.cc/500" class="rounded-top img-fluid justify-content-center" width=300>
+      </div>
+      <h2 class="text-center p-2"><%= @car.brand %> <%= @car.model %></h2>
+      <div class="d-flex justify-content-center" style="gap: 20px;">
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cake"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h0.01"/><path d="M12 4h0.01"/><path d="M17 4h0.01"/></svg>
+          <%= @car.year_of_production %></p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <%= @car.address %></p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-euro"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M7 12h5"/><path d="M15 9.4a4 4 0 1 0 0 5.2"/></svg>
+          <%= @car.price_per_day %>€
+        </p>
+      </div>
+      <p><strong>Commentaire:</strong> <%= @car.comment %></p>
     </div>
-  </div>
 
+    <div class="col m-3 bg-white rounded p-3 shadow" >
+      <h1 class="text-center mt-3">Reservation</h1>
+      <div style="align-content: center; width:100%; height:100%">
+        <%= simple_form_for([@car, @booking]) do |form| %>
+          <%= form.input :starts_at,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+          <%= form.input :ends_at,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+            <%= form.submit "Réserver", class: 'btn btn-primary'%>
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
 </div>
+
+
+    <%# t.date "starts_at"
+    t.date "ends_at"
+    t.string "accepted"
+    t.bigint "user_id", null: false
+    t.bigint "car_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_bookings_on_car_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id" %>
