@@ -1,12 +1,14 @@
-
 <div class="container py-3">
-  <%= link_to "Retour à la liste des voitures", cars_path, class: "btn btn-primary" %>
-
-
+  <%= link_to "Back to car list", cars_path, class: "btn btn-primary" %>
   <div class="row justify-content-center">
     <div class="col m-3 bg-white rounded p-3 shadow">
       <div style="display:flex; width:100%; place-content:center;">
-        <img src="https://i.pravatar.cc/500" class="rounded-top img-fluid justify-content-center" width=300>
+        <img src="<%= [
+          'https://images.caradisiac.com/logos/1/1/0/6/191106/S7-maxi-fiche-fiabilite-que-vaut-la-seat-ibiza-5-en-occasion-108185.jpg',
+          'https://cdn-s-www.ledauphine.com/images/3941B2AB-35A8-403F-9AE0-2B79E7B9314A/NW_raw/des-jupes-laterales-specifiques-en-carbone-ont-ete-integrees-sur-l-alpine-a110-r-pour-etendre-le-plancher-plat-vers-l-exterieur-grace-a-cette-surface-prolongee-l-air-devient-moins-turbulent-tout-le-long-de-la-voiture-en-limitant-les-perturbations-dans-le-soubassement-1674482616.jpg',
+          'https://www.largus.fr/images/images/205-gti-avd.jpg'
+        ][@car.price_per_day.to_i%3]%>"
+        class="rounded-top img-fluid justify-content-center" width=300>
       </div>
       <h2 class="text-center p-2"><%= @car.brand %> <%= @car.model %></h2>
       <div class="d-flex justify-content-center" style="gap: 20px;">
@@ -18,12 +20,12 @@
           <%= @car.address %></p>
         <p>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-euro"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="M7 12h5"/><path d="M15 9.4a4 4 0 1 0 0 5.2"/></svg>
-          <%= @car.price_per_day %>€
+          <%= @car.price_per_day %>/day
+
         </p>
       </div>
-      <p><strong>Commentaire:</strong> <%= @car.comment %></p>
+      <p><strong>Comment:</strong> <%= @car.comment %></p>
     </div>
-
     <div class="col m-3 bg-white rounded p-3 shadow" >
       <h1 class="text-center mt-3">Reservation</h1>
       <div style="align-content: center; width:100%; height:100%">
@@ -34,22 +36,31 @@
           <%= form.input :ends_at,
             as: :string,
             input_html: { data: { controller: "datepicker" } } %>
-            <%= form.submit "Réserver", class: 'btn btn-primary'%>
+            <%= form.submit "Book", class: 'btn btn-primary'%>
         <% end %>
       </div>
     </div>
+  </div>
 
-
+  <div class="row justify-content-center">
+    <div class="col m-3 bg-white rounded p-3 shadow">
+      <h1 class="text-center mt-3">Bookings</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Starts at</th>
+            <th>Ends at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @car.bookings.each do |booking| %>
+            <tr>
+              <td><%= booking.starts_at %></td>
+              <td><%= booking.ends_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-
-    <%# t.date "starts_at"
-    t.date "ends_at"
-    t.string "accepted"
-    t.bigint "user_id", null: false
-    t.bigint "car_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["car_id"], name: "index_bookings_on_car_id"
-    t.index ["user_id"], name: "index_bookings_on_user_id" %>
