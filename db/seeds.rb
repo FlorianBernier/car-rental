@@ -48,7 +48,7 @@ Car.create!(user: User.all.sample, brand: 'Bentley', model: 'Continental GT', ye
 Car.create!(user: User.all.sample, brand: 'Rolls-Royce', model: 'Phantom', year_of_production: Date.new(2020), address: 'Paris', price_per_day: 250.0, comment: "Limousine de luxe, elle incarne l'élégance et le prestige à l'état pur.")
 Car.create!(user: User.all.sample, brand: 'Maserati', model: 'Ghibli', year_of_production: Date.new(2020), address: 'Paris', price_per_day: 180.0, comment: "Berline de luxe et de sport, elle offre des performances exceptionnelles et un design raffiné.")
 Car.create!(user: User.all.sample, brand: 'Alpine', model: 'A110', year_of_production: Date.new(2020), address: 'Paris', price_per_day: 150.0, comment: "Voiture de sport légère et agile, elle offre des sensations de conduite uniques.")
-Car.create!(user: User.all.sample, brand: 'Alpine', model: 'A110', year_of_production: Date.new(2020), address: 'Les Iffs', price_per_day: 150.0, comment: "Voiture de sport légère et agile, elle offre des sensations de conduite uniques.")
+Car.create!(user: User.all.sample, brand: 'Seat', model: 'ibiza', year_of_production: Date.new(2020), address: 'Les Iffs', price_per_day: 150.0, comment: "Voiture de sport légère et agile, elle offre des sensations de conduite uniques.")
 
 puts "seeded #{User.count} users"
 puts "seeded #{Car.count} cars"
