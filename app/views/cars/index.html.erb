@@ -1,12 +1,30 @@
-
 <div class="container py-3">
 <%= link_to "Home", root_path, class: "btn btn-primary" %>
+        <%= simple_form_for :search, url: cars_path, method: :get do |f| %>
+          <div class="search-form-control form-group">
+            <%= text_field_tag :city,params[:city],class: "d-none"%>
+            <%= text_field_tag :query,
+                params[:query],
+                class: "form-control string required",
+                placeholder: "Brand.. Ex: Seat"
+            %>
+            <button type="submit" class="btn btn-flat">
+                <i class="fas fa-search text-dark"></i><span class="text-dark">Search</span>
+            </button>
+          </div>
+        <% end %>
 
   <%# CARD LISTE %>
   <div class="row justify-content-md-center">
-
     <% @cars.each do |car| %>
       <div class="col-3 m-3 bg-white rounded p-3 shadow">
+        <img src="<%= [
+          'https://images.caradisiac.com/logos/1/1/0/6/191106/S7-maxi-fiche-fiabilite-que-vaut-la-seat-ibiza-5-en-occasion-108185.jpg',
+          'https://cdn-s-www.ledauphine.com/images/3941B2AB-35A8-403F-9AE0-2B79E7B9314A/NW_raw/des-jupes-laterales-specifiques-en-carbone-ont-ete-integrees-sur-l-alpine-a110-r-pour-etendre-le-plancher-plat-vers-l-exterieur-grace-a-cette-surface-prolongee-l-air-devient-moins-turbulent-tout-le-long-de-la-voiture-en-limitant-les-perturbations-dans-le-soubassement-1674482616.jpg',
+          'https://www.largus.fr/images/images/205-gti-avd.jpg'
+        ][car.price_per_day.to_i%3]%>"
+        class="rounded-top img-fluid justify-content-center" width=300>
+
         <%= link_to car_path(car), class:"text-decoration-none" do %>
           <h2><%= car.brand %> <%= car.model %></h2>
           <p><strong>Année de production:</strong> <%= car.year_of_production %></p>

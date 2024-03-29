@@ -1,4 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div>
+</div>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1><strong>CAR RENTAL<strong> Book a car now and enjoy easy travels !</h1>
+    <p>Explore new horizons with our wide range of available cars.</p>
 
-<%= link_to "Voir toutes les voitures", cars_path, class: "btn btn-primary" %>
+    <div class="row">
+      <div class="col-4">
+        <%= simple_form_for :search, url: cars_path, method: :get do |f| %>
+          <div class="search-form-control form-group">
+
+            <%= text_field_tag :city,
+                params[:city],
+                class: "form-control string required",
+                placeholder: "City ex : Rennes"
+            %>
+            <button name="button" type="submit" class="btn btn-flat">
+                <i class="fas fa-search text-dark"></i><span class="text-dark">Search</span>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

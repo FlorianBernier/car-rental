@@ -8,10 +8,16 @@ class BookingsController < ApplicationController
     @booking = @car.bookings.new(booking_params)
     @booking.user = current_user
 
-    if @booking.save
-      redirect_to @car, notice: "Réservation créée avec succès."
+    if @booking.starts_at.nil? || @booking.ends_at.nil?
+      redirect_to @car, notice: "The reservation could not be created. The start date and end date are required."
+    elsif @booking.starts_at < Date.today
+      redirect_to @car, notice: "The reservation could not be created. The start date must be in the future."
+    elsif @booking.ends_at < @booking.starts_at
+      redirect_to @car, notice: "The reservation could not be created. The end date must be after the start date."
+    elsif @booking.save
+      redirect_to @car, notice: "Reservation created successfully."
     else
-      redirect_to @car, notice: "La réservation n'a pas pu être créé."
+      redirect_to @car, notice: "The reservation could not be created."
     end
   end
 
